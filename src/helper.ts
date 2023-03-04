@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import * as ac from "ansi-colors";
+import unidecode from "unidecode";
 
 /**
  * Number with trailing zeros.
@@ -33,9 +34,7 @@ export function toDateOnly(value: Date): string {
  * @param value slug value.
  */
 export function toSlug(value: string): string {
-  return value
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
+  return unidecode(value)
     .toLowerCase()
     .trim()
     .replace(/[^a-z ]+/g, "")
